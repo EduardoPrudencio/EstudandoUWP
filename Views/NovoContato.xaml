@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="Remeberme.Views.NovoContato"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Remeberme.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <StackPanel  Width="auto" >
+            <TextBox Header="Nome" Style="{StaticResource txtBoxForm}"  MaxLength="200" Width="400" />
+            <TextBox Header="Endereço" Style="{StaticResource txtBoxForm}" MaxLength="500" Width="500"  />
+            <CalendarDatePicker Style="{StaticResource calendarForm}" PlaceholderText="Data de nascimento" Header="Data de nascimento" />
+            <StackPanel Name="stkAreaButtons" Style="{StaticResource StkAreaButtons}" >
+                <Button Content="Salvar" Style="{StaticResource btnDefault}"></Button>
+                <Button Content="Cancelar" Style="{StaticResource btnDefault}" ></Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
