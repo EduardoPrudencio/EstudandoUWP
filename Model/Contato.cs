@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace Remeberme.Model
 {
-    public class Contato : ViewModel.ViewModelBase
+    public class Contato
     {
+
+        public Contato()
+        {
+            this.Nome = "Eduardo";
+        }
         public  Guid Id{ get; set; }
 
         public string Nome { get; set; }

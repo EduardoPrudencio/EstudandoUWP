@@ -35,13 +35,19 @@ namespace Remeberme
             page = args.SelectedItem as NavigationViewItem;
             page.Icon.Foreground = ConvertColorFromHexString("#ffffff");
 
+            ResetUI();
+
             if (page != null)
                 ChangePage(page.Content.ToString());
         }
 
         private void nvTopLevelNav_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
+            page = sender.SelectedItem as NavigationViewItem;
+            page.Icon.Foreground = ConvertColorFromHexString("#000000");
 
+            if (page != null)
+                ChangePage(page.Content.ToString());
         }
 
         private void ChangePage(string pageName)
@@ -61,8 +67,15 @@ namespace Remeberme
                 case "novo contato":
                     contentFrame.Navigate(typeof(Views.NovoContato));
                     break;
-
             }
+        }
+
+        private void ResetUI()
+        {
+            string colorDefault = "#ff8106";
+
+            foreach (NavigationViewItem nvi in nvTopLevelNav.MenuItems.OfType<NavigationViewItem>())
+                nvi.Foreground = ConvertColorFromHexString(colorDefault);
         }
 
         private SolidColorBrush ConvertColorFromHexString(string colorHexa)
