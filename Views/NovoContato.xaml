@@ -22,7 +22,7 @@
             <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Endereco}" MaxLength="500" Width="500"  />
             <CalendarDatePicker Style="{StaticResource calendarForm}" Date="{Binding DataDeNascimento}" PlaceholderText="Data de nascimento" Header="Data de nascimento" />
             <StackPanel Name="stkAreaButtons" Style="{StaticResource StkAreaButtons}" >
-                <Button Content="Salvar" Style="{StaticResource btnDefault}"></Button>
+                <Button Content="Salvar" Style="{StaticResource btnDefault}" Command="{Binding SaveButtonClicked}" />
                 <Button Content="Cancelar" Style="{StaticResource btnDefault}" ></Button>
             </StackPanel>
         </StackPanel>
