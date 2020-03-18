@@ -10,18 +10,29 @@ namespace Remeberme.ViewModel
 {
     public class NewContatoViewModel : ViewModelBase
     {
-        Contato contato;
+        private Contato contato = null;
 
-        private string _nome = "Eduardo";
         public NewContatoViewModel()
         {
             if (contato == null) contato = new Contato();
         }
 
-        public string ContatoNome
+        public string Nome
         {
             get { return contato.Nome; }
-            set { ContatoNome = value; OnPropertyChanged("ContatoNome"); }
+            set { if (value != contato.Nome) contato.Nome = value; OnPropertyChanged("Nome"); }
+        }
+
+        public string Endereco
+        {
+            get { return contato.Endereco; }
+            set { if (value != contato.Endereco) contato.Endereco = value; OnPropertyChanged("Endereco"); }
+        }
+
+        public DateTime DataDeNascimento
+        {
+            get { return contato.DataDeNascimento; }
+            set { if (value != contato.DataDeNascimento) contato.DataDeNascimento = value; OnPropertyChanged("DataDeNascimento"); }
         }
 
     }

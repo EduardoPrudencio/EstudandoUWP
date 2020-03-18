@@ -9,22 +9,18 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Page.Resources>
-        <ResourceDictionary>
-            <vm:NewContatoViewModel x:Key="contato" xmlns:vm="using:Remeberme.ViewModel" />
-        </ResourceDictionary>
-    </Page.Resources>
-    
-    
-    
+    <Page.DataContext>
+        <vm:NewContatoViewModel x:Key="contato" />
+    </Page.DataContext>
+
     <Grid>
         <StackPanel  Width="auto" >
 
             <TextBlock Text="Nome" Style="{StaticResource lblTitle}" />
-            <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding ContatoNome, Mode=TwoWay}" MaxLength="200" Width="400" />
+            <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Nome, Mode=TwoWay}" MaxLength="200" Width="400" />
             <TextBlock Text="Endereço" Style="{StaticResource lblTitle}" />
-            <TextBox Style="{StaticResource txtBoxForm}" MaxLength="500" Width="500"  />
-            <CalendarDatePicker Style="{StaticResource calendarForm}" PlaceholderText="Data de nascimento" Header="Data de nascimento" />
+            <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Endereco}" MaxLength="500" Width="500"  />
+            <CalendarDatePicker Style="{StaticResource calendarForm}" Date="{Binding DataDeNascimento}" PlaceholderText="Data de nascimento" Header="Data de nascimento" />
             <StackPanel Name="stkAreaButtons" Style="{StaticResource StkAreaButtons}" >
                 <Button Content="Salvar" Style="{StaticResource btnDefault}"></Button>
                 <Button Content="Cancelar" Style="{StaticResource btnDefault}" ></Button>

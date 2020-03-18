@@ -15,7 +15,7 @@
             SelectionChanged="nvTopLevelNav_SelectionChanged"
             ItemInvoked="nvTopLevelNav_ItemInvoked"
             IsTabStop="False"
-            Header="Lista de Contatos">
+            Header="Lista de Contatos" Foreground="Orange">
 
             <NavigationView.MenuItems>
                 <NavigationViewItem Style="{StaticResource NavigationViewItem}" Icon="GoToStart" Content="Início" IsSelected="True"/>

@@ -12,6 +12,8 @@ namespace Remeberme.Model
         public Contato()
         {
             this.Nome = "Eduardo";
+            this.Endereco = "Rua Manoel Teodoro n 90 apto 501";
+            this.DataDeNascimento = new DateTime(1983, 01, 10);
         }
         public  Guid Id{ get; set; }
 

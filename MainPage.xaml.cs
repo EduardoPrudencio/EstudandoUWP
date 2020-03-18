@@ -32,10 +32,9 @@ namespace Remeberme
 
         private void nvTopLevelNav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
+            ResetUI();
             page = args.SelectedItem as NavigationViewItem;
             page.Icon.Foreground = ConvertColorFromHexString("#ffffff");
-
-            ResetUI();
 
             if (page != null)
                 ChangePage(page.Content.ToString());
@@ -44,7 +43,6 @@ namespace Remeberme
         private void nvTopLevelNav_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             page = sender.SelectedItem as NavigationViewItem;
-            page.Icon.Foreground = ConvertColorFromHexString("#000000");
 
             if (page != null)
                 ChangePage(page.Content.ToString());
@@ -75,7 +73,10 @@ namespace Remeberme
             string colorDefault = "#ff8106";
 
             foreach (NavigationViewItem nvi in nvTopLevelNav.MenuItems.OfType<NavigationViewItem>())
+            { 
                 nvi.Foreground = ConvertColorFromHexString(colorDefault);
+                nvi.Icon.Foreground = ConvertColorFromHexString(colorDefault);
+            }
         }
 
         private SolidColorBrush ConvertColorFromHexString(string colorHexa)
