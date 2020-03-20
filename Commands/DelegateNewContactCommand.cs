@@ -7,14 +7,14 @@ using System.Windows.Input;
 
 namespace Remeberme.Commands
 {
-    public class DelegateCommand : ICommand
+    public class DelegateNewContactCommand : ICommand
     {
         private SimpleEventHandler handler;
         private bool isEnable = true;
         public event EventHandler CanExecuteChanged;
         public delegate void SimpleEventHandler();
 
-        public DelegateCommand(SimpleEventHandler handler)
+        public DelegateNewContactCommand(SimpleEventHandler handler)
         {
             this.handler = handler;
         }

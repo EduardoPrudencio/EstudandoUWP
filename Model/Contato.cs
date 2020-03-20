@@ -9,12 +9,19 @@ namespace Remeberme.Model
     public class Contato
     {
 
+        public Contato()
+        {
+            this.Localizacao = new Localizacao();
+        }
+
         public  Guid Id{ get; set; }
 
         public string Nome { get; set; }
 
-        public string Endereco { get; set; }
+        public Localizacao Localizacao { get; set; }
 
         public DateTime DataDeNascimento { get; set; }
+
+        public string DataDeCadastro { get; set; }
     }
 }

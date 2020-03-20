@@ -29,6 +29,9 @@ namespace Remeberme.DataAccess
         {
             StorageFile sampleFile = null;
 
+            contato.Id = Guid.NewGuid();
+            contato.DataDeCadastro = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
             if (File.Exists($"{storageFolder.Path}\\contatos.txt"))
             {
                 Task getFilesTask = Task.Run(async () =>
