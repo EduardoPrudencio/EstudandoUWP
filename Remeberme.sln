@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remeberme", "Remeberme.csproj", "{ECCF8604-6F04-4E9B-AABF-BCD690C8F9B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rememberme.DataAccess", "..\Rememberme.DataAccess\Rememberme.DataAccess.csproj", "{50D181D9-85E1-4F5A-B310-6F89F2A698DA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,26 +45,6 @@ Global
 		{ECCF8604-6F04-4E9B-AABF-BCD690C8F9B8}.Release|x86.ActiveCfg = Release|x86
 		{ECCF8604-6F04-4E9B-AABF-BCD690C8F9B8}.Release|x86.Build.0 = Release|x86
 		{ECCF8604-6F04-4E9B-AABF-BCD690C8F9B8}.Release|x86.Deploy.0 = Release|x86
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Debug|ARM.ActiveCfg = Debug|ARM
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Debug|ARM.Build.0 = Debug|ARM
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Debug|ARM64.ActiveCfg = Debug|ARM64
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Debug|ARM64.Build.0 = Debug|ARM64
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Debug|x64.ActiveCfg = Debug|x64
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Debug|x64.Build.0 = Debug|x64
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Debug|x86.ActiveCfg = Debug|x86
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Debug|x86.Build.0 = Debug|x86
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Release|ARM.ActiveCfg = Release|ARM
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Release|ARM.Build.0 = Release|ARM
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Release|ARM64.ActiveCfg = Release|ARM64
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Release|ARM64.Build.0 = Release|ARM64
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Release|x64.ActiveCfg = Release|x64
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Release|x64.Build.0 = Release|x64
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Release|x86.ActiveCfg = Release|x86
-		{50D181D9-85E1-4F5A-B310-6F89F2A698DA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
