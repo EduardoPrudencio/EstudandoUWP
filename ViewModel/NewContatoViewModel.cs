@@ -97,16 +97,30 @@ namespace Remeberme.ViewModel
 
         public async void FindResult()
         {
-            DataManager.Instance.AddContato(contato);
-            DataManager.Instance.SaveList();
+            try
+            {
+                bool listaSalvaComSucesso = false;
 
-            string nameToShow = contato.Nome;
+                if(DataManager.Instance.AddContato(contato))
+                    listaSalvaComSucesso = DataManager.Instance.SaveList();
 
-            var dialog = new MessageDialog($"Salvando od dados de {nameToShow}");
+                string nameToShow = contato.Nome;
 
-            await dialog.ShowAsync();
+                MessageDialog dialog = null;
 
-            ResetForm();
+                if (listaSalvaComSucesso)
+                    dialog = new MessageDialog($"Os dados de {nameToShow} foram salvos com sucesso!");
+                else
+                    dialog = new MessageDialog($"Ocorreu um erro ao tentar salvar os dados de {nameToShow}.");
+
+                await dialog.ShowAsync();
+
+                ResetForm();
+            }
+            catch (Exception)
+            {
+                //throw;
+            }
 
         }
 
@@ -120,6 +134,7 @@ namespace Remeberme.ViewModel
             this.Cidade = "";
             this.Bairro = "";
             this.Uf = "";
+            this.DataDeNascimento = new DateTime(1950, 1, 1);
 
         }
     }

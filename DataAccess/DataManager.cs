@@ -25,12 +25,52 @@ namespace Remeberme.DataAccess
 
         public static DataManager Instance { get { return _instance ?? (_instance = new DataManager()); } }
 
-        public void AddContato(Contato contato)
-        {
-            StorageFile sampleFile = null;
+        public ObservableCollection<Contato> Contatos { get { UpdateList(); return _lisfOfContacts; } }
 
-            contato.Id = Guid.NewGuid();
-            contato.DataDeCadastro = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        public bool AddContato(Contato contato)
+        {
+            try
+            {   
+                contato.Id = Guid.NewGuid();
+                contato.DataDeCadastro = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                UpdateList();
+
+                _lisfOfContacts.Add(contato);
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool SaveList()
+        {
+            try
+            {
+                string listaSerializada = Newtonsoft.Json.JsonConvert.SerializeObject(_lisfOfContacts);
+                SaveFile(listaSerializada);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private void SaveFile(string data)
+        {
+            using (StreamWriter sw = new StreamWriter($"{storageFolder.Path}\\contatos.txt"))
+            {
+                sw.Write(data);
+            }
+        }
+
+        private void UpdateList() {
+
+            StorageFile sampleFile = null;
 
             if (File.Exists($"{storageFolder.Path}\\contatos.txt"))
             {
@@ -48,22 +88,6 @@ namespace Remeberme.DataAccess
                 });
 
                 readFileTask.Wait();
-            }
-
-            _lisfOfContacts.Add(contato);
-        }
-
-        public void SaveList()
-        {
-            string listaSerializada = Newtonsoft.Json.JsonConvert.SerializeObject(_lisfOfContacts);
-            SaveFile(listaSerializada);
-        }
-
-        private void SaveFile(string data)
-        {
-            using (StreamWriter sw = new StreamWriter($"{storageFolder.Path}\\contatos.txt"))
-            {
-                sw.Write(data);
             }
         }
     }

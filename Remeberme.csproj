@@ -128,6 +128,7 @@
     <Compile Include="Model\Contato.cs" />
     <Compile Include="Model\Localizacao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ContatosViewModel.cs" />
     <Compile Include="ViewModel\NewContatoViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="Views\Contatos.xaml.cs">
