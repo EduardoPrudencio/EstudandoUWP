@@ -15,7 +15,9 @@
     
 
     <Grid HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="1">
-        <ListView ItemsSource="{Binding Contatos, Mode=OneWay}" >
+
+        <ScrollViewer>
+            <ListView ItemsSource="{Binding Contatos, Mode=OneWay}" >
             <ListView.HeaderTemplate>
                 <DataTemplate>
                     <Grid Padding="12" Background="{ThemeResource SystemBaseLowColor}">
@@ -23,10 +25,12 @@
                             <ColumnDefinition Width="350"/>
                             <ColumnDefinition Width="260"/>
                             <ColumnDefinition Width="160"/>
+                            <ColumnDefinition Width="160"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Nome" Style="{ThemeResource CaptionTextBlockStyle}"/>
                         <TextBlock Grid.Column="1" Text="Data de nascimento" Style="{ThemeResource CaptionTextBlockStyle}"/>
                         <TextBlock Grid.Column="2" Text="Bairro" Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        <TextBlock Grid.Column="3" Text="" Style="{ThemeResource CaptionTextBlockStyle}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.HeaderTemplate>
@@ -38,18 +42,21 @@
                             <ColumnDefinition Width="350"/>
                             <ColumnDefinition Width="260"/>
                             <ColumnDefinition Width="260"/>
+                            <ColumnDefinition Width="260"/>
                         </Grid.ColumnDefinitions>
                         <Ellipse Height="32" Width="32" VerticalAlignment="Center">
                             <Ellipse.Fill>
                                 <ImageBrush ImageSource="Placeholder.png"/>
                             </Ellipse.Fill>
                         </Ellipse>
-                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Nome}" />
-                        <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="{x:Bind DataDeNascimento}"/>
-                        <TextBlock Grid.Column="3" VerticalAlignment="Center" Text="{x:Bind Bairro}"/>
+                            <TextBlock Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource lblTitle}" Text="{x:Bind Nome}" />
+                        <TextBlock Grid.Column="2"     VerticalAlignment="Center" Style="{StaticResource lblTitle}" Text="{x:Bind DataDeNascimento}"/>
+                        <TextBlock Grid.Column="3"     VerticalAlignment="Center" Style="{StaticResource lblTitle}" Text="{x:Bind Bairro}"/>
+                        <Button Grid.Column="4" VerticalAlignment="Center" Content="Editar"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        </ScrollViewer>
     </Grid>
 </Page>

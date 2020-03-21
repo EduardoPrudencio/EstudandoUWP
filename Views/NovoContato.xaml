@@ -18,47 +18,50 @@
     </Page.Resources>
 
     <Grid>
-        <StackPanel  Width="auto" >
-
-            <TextBlock Text="Nome" Style="{StaticResource lblTitle}" />
-            <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Nome, Mode=TwoWay}" MaxLength="200" Width="400" />
-
-            <TextBlock Text="Cep" Style="{StaticResource lblTitle}" />
-            <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Cep, Mode=TwoWay}" MaxLength="9" Width="130"  />
-
-            <TextBlock Text="Endereço" Style="{StaticResource lblTitle}" />
-            <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Endereco, Mode=TwoWay}" MaxLength="500" Width="500"  />
-
-            <TextBlock Text="Número" Style="{StaticResource lblTitle}" />
-            <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Numero, Mode=TwoWay}" MaxLength="5" Width="70"  />
-
-            <TextBlock Text="Complemento" Style="{StaticResource lblTitle}" />
-            <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Complemento, Mode=TwoWay}" MaxLength="200" Width="300"  />
+        <ScrollViewer>
+            <StackPanel  Width="auto" >
 
 
-            <TextBlock Text="Bairro" Style="{StaticResource lblTitle}" />
-            <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Bairro, Mode=TwoWay}" MaxLength="200" Width="250"  />
+                <TextBlock Text="Nome" Style="{StaticResource lblTitle}" />
+                <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Nome, Mode=TwoWay}" MaxLength="200" Width="400" />
 
-            <TextBlock Text="Cidade" Style="{StaticResource lblTitle}" />
-            <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Cidade, Mode=TwoWay}" MaxLength="100" Width="240"  />
+                <TextBlock Text="Cep" Style="{StaticResource lblTitle}" />
+                <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Cep, Mode=TwoWay}" MaxLength="9" Width="130"  />
 
-            <TextBlock Text="UF" Style="{StaticResource lblTitle}" />
-            <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Uf, Mode=TwoWay}" MaxLength="2" Width="70"  />
+                <TextBlock Text="Endereço" Style="{StaticResource lblTitle}" />
+                <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Endereco, Mode=TwoWay}" MaxLength="500" Width="500"  />
 
-            <CalendarDatePicker Style="{StaticResource calendarForm}" 
+                <TextBlock Text="Número" Style="{StaticResource lblTitle}" />
+                <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Numero, Mode=TwoWay}" MaxLength="5" Width="70"  />
+
+                <TextBlock Text="Complemento" Style="{StaticResource lblTitle}" />
+                <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Complemento, Mode=TwoWay}" MaxLength="200" Width="300"  />
+
+
+                <TextBlock Text="Bairro" Style="{StaticResource lblTitle}" />
+                <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Bairro, Mode=TwoWay}" MaxLength="200" Width="250"  />
+
+                <TextBlock Text="Cidade" Style="{StaticResource lblTitle}" />
+                <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Cidade, Mode=TwoWay}" MaxLength="100" Width="240"  />
+
+                <TextBlock Text="UF" Style="{StaticResource lblTitle}" />
+                <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Uf, Mode=TwoWay}" MaxLength="2" Width="70"  />
+
+                <CalendarDatePicker Style="{StaticResource calendarForm}" 
                                 Date="{Binding DataDeNascimento, Mode=TwoWay, Converter={StaticResource TimeConverter}}" 
                                 PlaceholderText="Data de nascimento" 
                                 Header="Data de nascimento"
                                 DateFormat="{}{day.integer}/{month.integer}/{year.full}"/>
-            <StackPanel Name="stkAreaButtons" Style="{StaticResource StkAreaButtons}" >
-                <Button Content="Salvar" Style="{StaticResource btnDefault}" 
+                <StackPanel Name="stkAreaButtons" Style="{StaticResource StkAreaButtons}" >
+                    <Button Content="Salvar" Style="{StaticResource btnDefault}" 
                         IsEnabled="{Binding IsActiveToSave}"
                         Command="{Binding SaveButtonClicked}" 
                         />
-                <Button Content="Cancelar" Style="{StaticResource btnDefault}"
+                    <Button Content="Cancelar" Style="{StaticResource btnDefault}"
                          Command="{Binding CancelButtonClicked}" 
                           />
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
