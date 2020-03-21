@@ -12,6 +12,7 @@ namespace Remeberme.Model
         public Contato()
         {
             this.Localizacao = new Localizacao();
+            this.DataDeNascimento = new DateTime(1950, 01, 01);
         }
 
         public  Guid Id{ get; set; }

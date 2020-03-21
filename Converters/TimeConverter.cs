@@ -11,7 +11,8 @@ namespace Remeberme.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return new DateTimeOffset(((DateTime)value).ToUniversalTime());
+            var date = new DateTimeOffset(((DateTime)value).ToUniversalTime());
+            return date;
 
         }
 

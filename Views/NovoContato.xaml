@@ -14,7 +14,7 @@
         <vm:NewContatoViewModel />
     </Page.DataContext>
     <Page.Resources>
-        <cv:TimeConverter x:Key="TimeConverter"/>
+        <cv:TimeConverter x:Key="TimeConverter"></cv:TimeConverter>
     </Page.Resources>
 
     <Grid>
@@ -46,7 +46,7 @@
             <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Uf, Mode=TwoWay}" MaxLength="2" Width="70"  />
 
             <CalendarDatePicker Style="{StaticResource calendarForm}" 
-                                Date="{Binding DataDeNascimento, Mode=TwoWay, Converter={Binding TimeConverter}}" 
+                                Date="{Binding DataDeNascimento, Mode=TwoWay, Converter={StaticResource TimeConverter}}" 
                                 PlaceholderText="Data de nascimento" 
                                 Header="Data de nascimento"
                                 DateFormat="{}{day.integer}/{month.integer}/{year.full}"/>
