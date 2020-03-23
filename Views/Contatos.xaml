@@ -4,21 +4,29 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Remeberme.Views"
     xmlns:vm="using:Remeberme.ViewModel"
+    xmlns:cv ="using:Remeberme.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     mc:Ignorable="d"
      BorderBrush="Black" BorderThickness="1"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.DataContext>
         <vm:ContatosViewModel/>
     </Page.DataContext>
+
+    <Page.Resources>
+        <cv:ObjectToContactConverter x:Key="ObjectToContactConverter" />
+    </Page.Resources>
     
 
     <Grid HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="1">
 
         <ScrollViewer>
-            <ListView ItemsSource="{Binding Contatos, Mode=OneWay}" >
-            <ListView.HeaderTemplate>
+            <ListView ItemsSource="{Binding Contatos}" 
+                      SelectionMode="Single"
+                      SelectedItem="{Binding ItemListViewSelected, Mode=TwoWay, Converter={StaticResource ObjectToContactConverter}}">
+                <ListView.HeaderTemplate>
                 <DataTemplate>
                     <Grid Padding="12" Background="{ThemeResource SystemBaseLowColor}">
                         <Grid.ColumnDefinitions>

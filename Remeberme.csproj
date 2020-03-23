@@ -119,7 +119,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\DelegateContactsCommand.cs" />
     <Compile Include="Commands\DelegateNewContactCommand.cs" />
+    <Compile Include="Converters\ObjectToContactConverter.cs" />
     <Compile Include="Converters\TimeConverter.cs" />
     <Compile Include="DataAccess\DataManager.cs" />
     <Compile Include="MainPage.xaml.cs">

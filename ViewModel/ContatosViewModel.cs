@@ -1,4 +1,5 @@
-﻿using Remeberme.DataAccess;
+﻿using Remeberme.Commands;
+using Remeberme.DataAccess;
 using Remeberme.Model;
 using Remeberme.Views;
 using System;
@@ -7,16 +8,18 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Remeberme.ViewModel
 {
     public class ContatosViewModel : ViewModelBase
     {
-        ObservableCollection<NewContatoViewModel> ListaDeContatos = new ObservableCollection<NewContatoViewModel>();
 
+        ObservableCollection<NewContatoViewModel> ListaDeContatos;
         public ContatosViewModel()
         {
-            ConverterToViewModel();
+            var list = DataManager.Instance.Contatos.Select(x => ConverterToViewModel(x)).ToList();
+            ListaDeContatos = new ObservableCollection<NewContatoViewModel>(list);
         }
 
         public ObservableCollection<NewContatoViewModel> Contatos
@@ -25,20 +28,25 @@ namespace Remeberme.ViewModel
             set {OnPropertyChanged("Contatos"); }
         }
 
-        private void ConverterToViewModel() 
+        private NewContatoViewModel _itemListViewSelected;
+        public NewContatoViewModel ItemListViewSelected
         {
-            foreach (var cont in DataManager.Instance.Contatos)
+            get => _itemListViewSelected;
+            set
             {
-                NewContatoViewModel c = new NewContatoViewModel
-                {
-                    Nome = cont.Nome,
-                    DataDeNascimento = cont.DataDeNascimento,
-                    Bairro = cont.Localizacao.Bairro,
-                };
-
-                ListaDeContatos.Add(c);
+                _itemListViewSelected = value;
+                OnPropertyChanged("ItemListViewSelected");
             }
-            
+        }
+
+        private NewContatoViewModel ConverterToViewModel(Contato cont) 
+        {
+            return new NewContatoViewModel
+            {
+                Nome = cont.Nome,
+                DataDeNascimento = cont.DataDeNascimento,
+                Bairro = cont.Localizacao.Bairro,
+            };
         }
     }
 }
