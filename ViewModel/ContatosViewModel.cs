@@ -50,7 +50,7 @@ namespace Remeberme.ViewModel
             await dialog.ShowAsync();
         }
 
-        private void DeleteContact()
+        private async void DeleteContact()
         {
             ContentDialog dialog = new ContentDialog 
             { 
@@ -61,19 +61,21 @@ namespace Remeberme.ViewModel
                 CloseButtonText = "Cancelar",
             };
 
-            ContentDialogResult result;
+            var result = await dialog.ShowAsync();
 
-            Task dialogTask = Task.Run(async () => 
-            {
-                result = await dialog.ShowAsync();
-            });
+            string idSelecionado = string.Empty;
 
-            dialogTask.Wait();
+            if (result == ContentDialogResult.Primary)
+            { 
+                idSelecionado = ItemListViewSelected.Id.ToString();
 
+                Contato contato = DataManager.Instance.Contatos.FirstOrDefault(x => x.Id.ToString().Equals(idSelecionado));
 
-            string idSelecionado = ItemListViewSelected.Id.ToString();
+                DataManager.Instance.RemoveContato(contato);
 
-
+                if (DataManager.Instance.SaveList())
+                    this.Contatos = DataManager.Instance.Contatos;
+            }
         }
     }
 }

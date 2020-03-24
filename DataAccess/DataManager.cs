@@ -13,6 +13,7 @@ namespace Remeberme.DataAccess
     public class DataManager
     {
         StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+        private object _lock = new object();
 
         private DataManager()
         {
@@ -30,7 +31,7 @@ namespace Remeberme.DataAccess
         public bool AddContato(Contato contato)
         {
             try
-            {   
+            {
                 contato.Id = Guid.NewGuid();
                 contato.DataDeCadastro = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
@@ -46,17 +47,39 @@ namespace Remeberme.DataAccess
             }
         }
 
-        public bool SaveList()
+        public bool RemoveContato(Contato contato)
         {
             try
             {
-                string listaSerializada = Newtonsoft.Json.JsonConvert.SerializeObject(_lisfOfContacts);
-                SaveFile(listaSerializada);
+                UpdateList();
+
+                List<Contato> listaFiltrada = _lisfOfContacts.Where(x => !x.Id.ToString().Equals(contato.Id.ToString())).ToList();
+                _lisfOfContacts = new ObservableCollection<Contato>(listaFiltrada);
+
+                this.SaveList();
+
                 return true;
             }
             catch (Exception)
             {
                 return false;
+            }
+        }
+
+        public bool SaveList()
+        {
+            lock (_lock)
+            {
+                try
+                {
+                    string listaSerializada = Newtonsoft.Json.JsonConvert.SerializeObject(_lisfOfContacts);
+                    SaveFile(listaSerializada);
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
             }
         }
 
@@ -68,26 +91,29 @@ namespace Remeberme.DataAccess
             }
         }
 
-        private void UpdateList() {
-
-            StorageFile sampleFile = null;
-
-            if (File.Exists($"{storageFolder.Path}\\contatos.txt"))
+        private void UpdateList()
+        {
+            lock (_lock)
             {
-                Task getFilesTask = Task.Run(async () =>
+                StorageFile sampleFile = null;
+
+                if (File.Exists($"{storageFolder.Path}\\contatos.txt"))
                 {
-                    sampleFile = await storageFolder.GetFileAsync("contatos.txt");
-                });
+                    Task getFilesTask = Task.Run(async () =>
+                    {
+                        sampleFile = await storageFolder.GetFileAsync("contatos.txt");
+                    });
 
-                getFilesTask.Wait();
+                    getFilesTask.Wait();
 
-                Task readFileTask = Task.Run(async () =>
-                {
-                    string json = await FileIO.ReadTextAsync(sampleFile);
-                    _lisfOfContacts = Newtonsoft.Json.JsonConvert.DeserializeObject<ObservableCollection<Contato>>(json);
-                });
+                    Task readFileTask = Task.Run(async () =>
+                    {
+                        string json = await FileIO.ReadTextAsync(sampleFile);
+                        _lisfOfContacts = Newtonsoft.Json.JsonConvert.DeserializeObject<ObservableCollection<Contato>>(json);
+                    });
 
-                readFileTask.Wait();
+                    readFileTask.Wait();
+                }
             }
         }
     }
