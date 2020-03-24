@@ -9,7 +9,6 @@ namespace Remeberme.Commands
 {
     public class DelegateContactsCommand : ICommand
     {
-
         private SimpleEventHandler handler;
         private bool isEnable = true;
         public event EventHandler CanExecuteChanged;
@@ -19,12 +18,13 @@ namespace Remeberme.Commands
         {
             this.handler = handler;
         }
+        
+        public bool IsEnable { get { return this.isEnable; } }
 
         private void OnCanExecuteChanged()
         {
             this.CanExecuteChanged(this, EventArgs.Empty);
         }
-
 
         public bool CanExecute(object parameter)
         {

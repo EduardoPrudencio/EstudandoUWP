@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Remeberme.Views"
+    xmlns:m="using:Remeberme.Model"
     xmlns:vm="using:Remeberme.ViewModel"
     xmlns:cv ="using:Remeberme.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -33,17 +34,15 @@
                             <ColumnDefinition Width="350"/>
                             <ColumnDefinition Width="260"/>
                             <ColumnDefinition Width="160"/>
-                            <ColumnDefinition Width="160"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Nome" Style="{ThemeResource CaptionTextBlockStyle}"/>
                         <TextBlock Grid.Column="1" Text="Data de nascimento" Style="{ThemeResource CaptionTextBlockStyle}"/>
                         <TextBlock Grid.Column="2" Text="Bairro" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                        <TextBlock Grid.Column="3" Text="" Style="{ThemeResource CaptionTextBlockStyle}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.HeaderTemplate>
             <ListView.ItemTemplate>
-                <DataTemplate x:Name="TableDataTemplate" x:DataType="vm:NewContatoViewModel">
+                <DataTemplate x:Name="TableDataTemplate" x:DataType="m:Contato">
                     <Grid Height="48" AutomationProperties.Name="{x:Bind Nome}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0"/>
@@ -59,12 +58,18 @@
                         </Ellipse>
                             <TextBlock Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource lblTitle}" Text="{x:Bind Nome}" />
                         <TextBlock Grid.Column="2"     VerticalAlignment="Center" Style="{StaticResource lblTitle}" Text="{x:Bind DataDeNascimento}"/>
-                        <TextBlock Grid.Column="3"     VerticalAlignment="Center" Style="{StaticResource lblTitle}" Text="{x:Bind Bairro}"/>
-                        <Button Grid.Column="4" VerticalAlignment="Center" Content="Editar"/>
+                        <TextBlock Grid.Column="3"     VerticalAlignment="Center" Style="{StaticResource lblTitle}" Text="{x:Bind Localizacao.Bairro}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         </ScrollViewer>
+
+        <StackPanel Name="stkAreaButtons" Style="{StaticResource StkAreaButtons}" VerticalAlignment="Bottom" Margin="0,300,0,0">
+            <Button Content="Editar" Style="{StaticResource btnDefault}" 
+                    Command="{Binding EditSelectedContactClicked}"/>
+            <Button Content="Excluir" Style="{StaticResource btnDefault}"
+                    Command="{Binding DeleteSelectedContactClicked}"/>
+        </StackPanel>
     </Grid>
 </Page>

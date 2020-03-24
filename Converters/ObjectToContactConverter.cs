@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Remeberme.Model;
+using Remeberme.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +18,9 @@ namespace Remeberme.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
+            if (value is Contato)
+                return (Contato)value;
+
             return new object();
         }
     }

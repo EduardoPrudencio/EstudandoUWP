@@ -9,27 +9,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
 
 namespace Remeberme.ViewModel
 {
     public class ContatosViewModel : ViewModelBase
     {
 
-        ObservableCollection<NewContatoViewModel> ListaDeContatos;
-        public ContatosViewModel()
+        public ObservableCollection<Contato> Contatos
         {
-            var list = DataManager.Instance.Contatos.Select(x => ConverterToViewModel(x)).ToList();
-            ListaDeContatos = new ObservableCollection<NewContatoViewModel>(list);
-        }
-
-        public ObservableCollection<NewContatoViewModel> Contatos
-        {
-            get {  return ListaDeContatos; }
+            get {  return DataManager.Instance.Contatos; }
             set {OnPropertyChanged("Contatos"); }
         }
 
-        private NewContatoViewModel _itemListViewSelected;
-        public NewContatoViewModel ItemListViewSelected
+        private Contato _itemListViewSelected;
+
+        public Contato ItemListViewSelected
         {
             get => _itemListViewSelected;
             set
@@ -39,14 +35,45 @@ namespace Remeberme.ViewModel
             }
         }
 
-        private NewContatoViewModel ConverterToViewModel(Contato cont) 
+        public ICommand EditSelectedContactClicked {
+            get { return new DelegateContactsCommand(EditContact); }
+        }
+
+        public ICommand DeleteSelectedContactClicked
         {
-            return new NewContatoViewModel
-            {
-                Nome = cont.Nome,
-                DataDeNascimento = cont.DataDeNascimento,
-                Bairro = cont.Localizacao.Bairro,
+            get { return new DelegateContactsCommand(DeleteContact); }
+        }
+
+        private async void EditContact()
+        {
+            MessageDialog dialog = new MessageDialog($"Selecionou o contato de nome {this.ItemListViewSelected.Nome}");
+            await dialog.ShowAsync();
+        }
+
+        private void DeleteContact()
+        {
+            ContentDialog dialog = new ContentDialog 
+            { 
+                Title= "Atenção",
+                Content = $"Deseja mesmo excluir o contato {this.ItemListViewSelected.Nome}?",
+                PrimaryButtonText = "Sim",
+                SecondaryButtonText = "Não",
+                CloseButtonText = "Cancelar",
             };
+
+            ContentDialogResult result;
+
+            Task dialogTask = Task.Run(async () => 
+            {
+                result = await dialog.ShowAsync();
+            });
+
+            dialogTask.Wait();
+
+
+            string idSelecionado = ItemListViewSelected.Id.ToString();
+
+
         }
     }
 }
