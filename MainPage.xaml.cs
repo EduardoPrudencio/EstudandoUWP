@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Remeberme.DataAccess;
+using Remeberme.Helpers;
+using Remeberme.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -23,18 +26,65 @@ namespace Remeberme
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
+        List<NavigationViewItem> listaTempDeItens;
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            NavigationPage.Instance.OnVavigateToPage += Instance_OnVavigateToPage;
+
+            ResetMenu();
+        }
+
+        private void Instance_OnVavigateToPage(object sender, Helpers.NavigationEventArgs e)
+        {
+            ChangePage(e.PageToGo, e.ItemEdit);
         }
 
         NavigationViewItem page;
+
+        private List<NavigationViewItem> GetItemsMenu()
+        {
+            NavigationViewItem naviViewItemInicio = new NavigationViewItem
+            {
+                Content = "Início",
+                Icon = new SymbolIcon { Symbol = Symbol.GoToStart }
+            };
+
+            NavigationViewItem naviViewItemContatos = new NavigationViewItem
+            {
+                Content = "Contatos",
+                Icon = new SymbolIcon { Symbol = Symbol.People },
+            };
+
+            NavigationViewItem naviViewItemNovoContato = new NavigationViewItem
+            {
+                Content = "Novo Contato",
+                Icon = new SymbolIcon { Symbol = Symbol.AddFriend }
+            };
+
+            NavigationViewItem naviViewItemImoveis = new NavigationViewItem
+            {
+                Content = "Imóveis",
+                Icon = new SymbolIcon { Symbol = Symbol.Home }
+            };
+
+            listaTempDeItens = new List<NavigationViewItem>
+            {
+                naviViewItemInicio, naviViewItemContatos, naviViewItemNovoContato,naviViewItemImoveis
+            };
+
+            return listaTempDeItens;
+        }
 
         private void nvTopLevelNav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             ResetUI();
             page = args.SelectedItem as NavigationViewItem;
-            page.Icon.Foreground = ConvertColorFromHexString("#ffffff");
+
+            if (page.Icon != null) page.Icon.Foreground = ConvertColorFromHexString("#ffffff");
 
             if (page != null)
                 ChangePage(page.Content.ToString());
@@ -48,24 +98,38 @@ namespace Remeberme
                 ChangePage(page.Content.ToString());
         }
 
-        private void ChangePage(string pageName)
+        private void ChangePage(string pageName, object itemToedit = null)
         {
-            
             nvTopLevelNav.Header = pageName;
             pageName = pageName.ToLower();
 
             switch (pageName)
             {
-                case "início" :
-                        contentFrame.Navigate(typeof(Views.Home)); 
+                case "início":
+                    contentFrame.Navigate(typeof(Views.Home));
                     break;
                 case "contatos":
                     contentFrame.Navigate(typeof(Views.Contatos));
                     break;
                 case "novo contato":
-                    contentFrame.Navigate(typeof(Views.NovoContato));
-                    break;
+                  if(itemToedit != null) contentFrame.Navigate(typeof(Views.NovoContato), itemToedit);
+                  else contentFrame.Navigate(typeof(Views.NovoContato), itemToedit);
+                break;
             }
+        }
+
+        private void ResetMenu()
+        {
+            listaTempDeItens = GetItemsMenu();
+
+            for (int i=0; i < listaTempDeItens.Count;i++)
+            {
+              if(nvTopLevelNav.MenuItems.Count > 0)
+                nvTopLevelNav.MenuItems.RemoveAt(0);
+            }
+
+            foreach (var item in listaTempDeItens)
+                nvTopLevelNav.MenuItems.Add(item);
         }
 
         private void ResetUI()
@@ -75,7 +139,7 @@ namespace Remeberme
             foreach (NavigationViewItem nvi in nvTopLevelNav.MenuItems.OfType<NavigationViewItem>())
             { 
                 nvi.Foreground = ConvertColorFromHexString(colorDefault);
-                nvi.Icon.Foreground = ConvertColorFromHexString(colorDefault);
+                if (nvi.Icon != null) nvi.Icon.Foreground = ConvertColorFromHexString(colorDefault);
             }
         }
 

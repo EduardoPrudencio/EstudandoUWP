@@ -21,7 +21,7 @@
     </Page.Resources>
     
 
-    <Grid HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="1">
+    <Grid HorizontalAlignment="Left">
 
         <ScrollViewer>
             <ListView ItemsSource="{Binding Contatos}" 
@@ -31,8 +31,8 @@
                 <DataTemplate>
                     <Grid Padding="12" Background="{ThemeResource SystemBaseLowColor}">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="350"/>
-                            <ColumnDefinition Width="260"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="200"/>
                             <ColumnDefinition Width="160"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Nome" Style="{ThemeResource CaptionTextBlockStyle}"/>
@@ -46,9 +46,9 @@
                     <Grid Height="48" AutomationProperties.Name="{x:Bind Nome}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0"/>
-                            <ColumnDefinition Width="350"/>
-                            <ColumnDefinition Width="260"/>
-                            <ColumnDefinition Width="260"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="200"/>
                             <ColumnDefinition Width="260"/>
                         </Grid.ColumnDefinitions>
                         <Ellipse Height="32" Width="32" VerticalAlignment="Center">

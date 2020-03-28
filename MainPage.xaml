@@ -17,13 +17,6 @@
             IsTabStop="False"
             Header="Lista de Contatos" Foreground="Orange">
 
-            <NavigationView.MenuItems>
-                <NavigationViewItem Style="{StaticResource NavigationViewItem}" Icon="GoToStart" Content="Início" IsSelected="True"/>
-                <NavigationViewItem Style="{StaticResource NavigationViewItem}" Icon="People" Content="Contatos" />
-                <NavigationViewItem Style="{StaticResource NavigationViewItem}" Icon="AddFriend" Content="Novo Contato" />
-                <NavigationViewItem Style="{StaticResource NavigationViewItem}" Icon="Home" Content="Imóveis"/>
-            </NavigationView.MenuItems>
-
             <!--<NavigationView.AutoSuggestBox>
                 --><!-- See AutoSuggestBox documentation for
                      more info about how to implement search. --><!--
@@ -42,7 +35,6 @@
                 </TransitionCollection>
             </Frame.ContentTransitions>
         </Frame>
-
 
     </Grid>
 </Page>

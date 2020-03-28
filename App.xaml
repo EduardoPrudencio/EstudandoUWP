@@ -57,12 +57,12 @@
             <Setter Property="Margin" Value="0,0,10,0" />
         </Style>
 
-        <SolidColorBrush Color="White" x:Key="NavigationViewItemForegroundSelected"/>
+        <SolidColorBrush Color="White"  x:Key="NavigationViewItemForegroundSelected"/>
         <SolidColorBrush Color="Orange" x:Key="NavigationViewItemForeground"/>
         <SolidColorBrush Color="Orange" x:Key="NavigationViewItemBackgroundSelected"/>
-        <SolidColorBrush Color="Gray" x:Key="NavigationViewItemBackgroundSelectedPointerOver"/>
-        <SolidColorBrush Color="White" x:Key="NavigationViewItemForegroundSelectedPointerOver"/>
-        <SolidColorBrush Color="Black" x:Key="NavigationViewBackground"/>
+        <SolidColorBrush Color="Gray"   x:Key="NavigationViewItemBackgroundSelectedPointerOver"/>
+        <SolidColorBrush Color="White"  x:Key="NavigationViewItemForegroundSelectedPointerOver"/>
+        <SolidColorBrush Color="Black"  x:Key="NavigationViewBackground"/>
     </Application.Resources>
 
 </Application>

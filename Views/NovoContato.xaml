@@ -10,9 +10,9 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Page.DataContext>
+    <!--<Page.DataContext>
         <vm:NewContatoViewModel />
-    </Page.DataContext>
+    </Page.DataContext>-->
     <Page.Resources>
         <cv:TimeConverter x:Key="TimeConverter"></cv:TimeConverter>
     </Page.Resources>

@@ -124,6 +124,7 @@
     <Compile Include="Converters\ObjectToContactConverter.cs" />
     <Compile Include="Converters\TimeConverter.cs" />
     <Compile Include="DataAccess\DataManager.cs" />
+    <Compile Include="Helpers\NavigationPage.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

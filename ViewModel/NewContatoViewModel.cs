@@ -26,6 +26,8 @@ namespace Remeberme.ViewModel
             set { if (value != IsActiveToSave) IsActiveToSave = value;  }
         }
 
+        public Guid Id { get { return Id; } set { Id = value; } }
+
         public string Nome
         {
             get { return contato.Nome; }
@@ -56,20 +58,17 @@ namespace Remeberme.ViewModel
             set { if (value != contato.Localizacao.Complemento) contato.Localizacao.Complemento = value; OnPropertyChanged("Complemento"); }
         }
 
-
         public string Bairro
         {
             get { return contato.Localizacao.Bairro; }
             set { if (value != contato.Localizacao.Bairro) contato.Localizacao.Bairro = value; OnPropertyChanged("Bairro"); }
         }
 
-
         public string Cidade
         {
             get { return contato.Localizacao.Cidade; }
             set { if (value != contato.Localizacao.Cidade) contato.Localizacao.Cidade = value; OnPropertyChanged("Cidade"); }
         }
-
 
         public string Uf
         {
@@ -123,6 +122,21 @@ namespace Remeberme.ViewModel
             }
 
         }
+
+        public void Convert(Contato contato)
+        {
+            this.Id = contato.Id;
+            this.Nome = contato.Nome;
+            this.Cep = contato.Localizacao.Cep;
+            this.Numero = contato.Localizacao.Numero;
+            this.Complemento = contato.Localizacao.Complemento;
+            this.Endereco = contato.Localizacao.Endereco;
+            this.Cidade = contato.Localizacao.Cidade;
+            this.Bairro = contato.Localizacao.Bairro;
+            this.Uf = contato.Localizacao.Uf;
+            this.DataDeNascimento = contato.DataDeNascimento;
+        }
+
 
         private void ResetForm()
         {

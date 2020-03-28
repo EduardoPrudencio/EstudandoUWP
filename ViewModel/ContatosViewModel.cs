@@ -10,18 +10,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Remeberme.ViewModel
 {
     public class ContatosViewModel : ViewModelBase
     {
-
         public ObservableCollection<Contato> Contatos
         {
             get {  return DataManager.Instance.Contatos; }
             set {OnPropertyChanged("Contatos"); }
         }
+
+        public event EventHandler NeedToChangePage;
 
         private Contato _itemListViewSelected;
 
@@ -44,10 +46,15 @@ namespace Remeberme.ViewModel
             get { return new DelegateContactsCommand(DeleteContact); }
         }
 
-        private async void EditContact()
+        private  void EditContact()
         {
-            MessageDialog dialog = new MessageDialog($"Selecionou o contato de nome {this.ItemListViewSelected.Nome}");
-            await dialog.ShowAsync();
+            //MessageDialog dialog = new MessageDialog($"Selecionou o contato de nome {this.ItemListViewSelected.Nome}");
+            //await dialog.ShowAsync();
+
+            Contato contatoEdit = DataManager.Instance.Contatos.FirstOrDefault(c => c.Id.ToString().Equals(this.ItemListViewSelected.Id.ToString()));
+
+            Helpers.NavigationPage.Instance.GoToPage(new Helpers.NavigationEventArgs { PageToGo = "novo contato", ItemEdit = contatoEdit });
+
         }
 
         private async void DeleteContact()
