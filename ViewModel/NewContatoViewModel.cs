@@ -26,7 +26,7 @@ namespace Remeberme.ViewModel
             set { if (value != IsActiveToSave) IsActiveToSave = value;  }
         }
 
-        public Guid Id { get { return Id; } set { Id = value; } }
+        public string Id { get { return contato.Id.ToString(); }}
 
         public string Nome
         {
@@ -125,16 +125,17 @@ namespace Remeberme.ViewModel
 
         public void Convert(Contato contato)
         {
-            this.Id = contato.Id;
-            this.Nome = contato.Nome;
-            this.Cep = contato.Localizacao.Cep;
-            this.Numero = contato.Localizacao.Numero;
-            this.Complemento = contato.Localizacao.Complemento;
-            this.Endereco = contato.Localizacao.Endereco;
-            this.Cidade = contato.Localizacao.Cidade;
-            this.Bairro = contato.Localizacao.Bairro;
-            this.Uf = contato.Localizacao.Uf;
-            this.DataDeNascimento = contato.DataDeNascimento;
+            //this.Nome = contato.Nome;
+            //this.Cep = contato.Localizacao.Cep;
+            //this.Numero = contato.Localizacao.Numero;
+            //this.Complemento = contato.Localizacao.Complemento;
+            //this.Endereco = contato.Localizacao.Endereco;
+            //this.Cidade = contato.Localizacao.Cidade;
+            //this.Bairro = contato.Localizacao.Bairro;
+            //this.Uf = contato.Localizacao.Uf;
+            //this.DataDeNascimento = contato.DataDeNascimento;
+
+            this.contato = contato;
         }
 
 
