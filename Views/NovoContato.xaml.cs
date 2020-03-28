@@ -1,6 +1,4 @@
-﻿
-using Remeberme.Helpers;
-using Remeberme.Model;
+﻿using Remeberme.Model;
 using Remeberme.ViewModel;
 using Windows.UI.Xaml.Controls;
 
