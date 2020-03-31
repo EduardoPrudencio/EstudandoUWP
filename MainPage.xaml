@@ -9,7 +9,7 @@
     >
 
     <Grid>
-        <NavigationView x:Name="nvTopLevelNav"
+            <NavigationView x:Name="nvTopLevelNav"
             Style="{StaticResource NavigationViewMainStyle}"
             Margin="0,0,0,0"
             SelectionChanged="nvTopLevelNav_SelectionChanged"
@@ -24,7 +24,6 @@
             </NavigationView.AutoSuggestBox>-->
 
         </NavigationView>
-
         <Frame Style="{StaticResource FameStyle}" x:Name="contentFrame"  
                HorizontalAlignment="Left" 
                VerticalAlignment="Top"

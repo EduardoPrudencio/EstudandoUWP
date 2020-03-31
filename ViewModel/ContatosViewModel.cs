@@ -42,13 +42,8 @@ namespace Remeberme.ViewModel
 
         private  void EditContact()
         {
-            //MessageDialog dialog = new MessageDialog($"Selecionou o contato de nome {this.ItemListViewSelected.Nome}");
-            //await dialog.ShowAsync();
-
             Contato contatoEdit = DataManager.Instance.Contatos.FirstOrDefault(c => c.Id.ToString().Equals(this.ItemListViewSelected.Id.ToString()));
-
             Helpers.NavigationPage.Instance.GoToPage(new Helpers.NavigationEventArgs { PageToGo = "novo contato", ItemEdit = contatoEdit });
-
         }
 
         private async void DeleteContact()

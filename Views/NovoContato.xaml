@@ -10,17 +10,13 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <!--<Page.DataContext>
-        <vm:NewContatoViewModel />
-    </Page.DataContext>-->
     <Page.Resources>
         <cv:TimeConverter x:Key="TimeConverter"></cv:TimeConverter>
     </Page.Resources>
 
     <Grid>
-        <ScrollViewer>
-            <StackPanel  Width="auto" >
-
+        <ScrollViewer Name="scrollFormNewContato" >
+            <StackPanel  Width="600" >
 
                 <TextBlock Text="Nome" Style="{StaticResource lblTitle}" />
                 <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Nome, Mode=TwoWay}" MaxLength="200" Width="400" />
@@ -52,6 +48,7 @@
                                 PlaceholderText="Data de nascimento" 
                                 Header="Data de nascimento"
                                 DateFormat="{}{day.integer}/{month.integer}/{year.full}"/>
+                
                 <StackPanel Name="stkAreaButtons" Style="{StaticResource StkAreaButtons}" >
                     <Button Content="Salvar" Style="{StaticResource btnDefault}" 
                         IsEnabled="{Binding IsActiveToSave}"
@@ -60,7 +57,9 @@
                     <Button Content="Cancelar" Style="{StaticResource btnDefault}"
                          Command="{Binding CancelButtonClicked}" 
                           />
+                    <ProgressRing IsActive="{Binding SalvandoDados}" />
                 </StackPanel>
+                
             </StackPanel>
         </ScrollViewer>
     </Grid>

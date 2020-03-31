@@ -24,5 +24,7 @@ namespace Remeberme.Model
         public DateTime DataDeNascimento { get; set; }
 
         public string DataDeCadastro { get; set; }
+
+        public string Email { get; set; }
     }
 }

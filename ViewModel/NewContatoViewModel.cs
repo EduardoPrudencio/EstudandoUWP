@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Popups;
@@ -14,6 +15,7 @@ namespace Remeberme.ViewModel
     public class NewContatoViewModel : ViewModelBase
     {
         private Contato contato = null;
+        private bool _salvandoDados = false;
 
         public NewContatoViewModel()
         {
@@ -76,7 +78,9 @@ namespace Remeberme.ViewModel
             set { if (value != contato.Localizacao.Uf) contato.Localizacao.Uf = value; OnPropertyChanged("Uf"); }
         }
 
+        public string Email { get { return contato.Email; } set { if (contato.Email != value) contato.Email = value; OnPropertyChanged("Email"); } }
 
+        public bool SalvandoDados { get { return _salvandoDados; } set { if (value != _salvandoDados) _salvandoDados = value; OnPropertyChanged("SalvandoDados"); } }
 
         public DateTime DataDeNascimento
         {
@@ -96,23 +100,31 @@ namespace Remeberme.ViewModel
 
         public async void FindResult()
         {
+            MessageDialog dialog = null;
+
+            this.SalvandoDados = true;
+
             try
             {
-                bool listaSalvaComSucesso = false;
+               // Task salvandoDadosTasks = Task.Run(async () => 
+              //  {
+                    bool listaSalvaComSucesso = false;
 
-                if(DataManager.Instance.AddContato(contato))
-                    listaSalvaComSucesso = DataManager.Instance.SaveList();
+                    if (DataManager.Instance.AddContato(contato))
+                        listaSalvaComSucesso = DataManager.Instance.SaveList();
 
-                string nameToShow = contato.Nome;
+                    string nameToShow = contato.Nome;
 
-                MessageDialog dialog = null;
+                    if (listaSalvaComSucesso)
+                        dialog = new MessageDialog($"Os dados de {nameToShow} foram salvos com sucesso!");
+                    else
+                        dialog = new MessageDialog($"Ocorreu um erro ao tentar salvar os dados de {nameToShow}.");
 
-                if (listaSalvaComSucesso)
-                    dialog = new MessageDialog($"Os dados de {nameToShow} foram salvos com sucesso!");
-                else
-                    dialog = new MessageDialog($"Ocorreu um erro ao tentar salvar os dados de {nameToShow}.");
+                    await dialog.ShowAsync();
 
-                await dialog.ShowAsync();
+               /// });
+
+                //salvandoDadosTasks.Wait();
 
                 ResetForm();
             }
@@ -140,6 +152,7 @@ namespace Remeberme.ViewModel
             this.Bairro = "";
             this.Uf = "";
             this.DataDeNascimento = new DateTime(1950, 1, 1);
+            this.SalvandoDados = false;
 
         }
     }
