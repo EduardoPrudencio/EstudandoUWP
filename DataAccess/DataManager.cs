@@ -71,6 +71,9 @@ namespace Remeberme.DataAccess
             {
                 try
                 {
+                    List<Contato> _listaOrdenada = _lisfOfContacts.OrderBy(c => c.Nome).ToList();
+                    _lisfOfContacts = new ObservableCollection<Contato>(_listaOrdenada);
+
                     string listaSerializada = Newtonsoft.Json.JsonConvert.SerializeObject(_lisfOfContacts);
                     SaveFile(listaSerializada);
                     return true;

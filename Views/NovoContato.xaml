@@ -15,11 +15,14 @@
     </Page.Resources>
 
     <Grid>
-        <ScrollViewer Name="scrollFormNewContato" >
+        <ScrollViewer Name="scrollFormNewContato" IsEnabled="{Binding DeveBloquearTela}" >
             <StackPanel  Width="600" >
 
                 <TextBlock Text="Nome" Style="{StaticResource lblTitle}" />
                 <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Nome, Mode=TwoWay}" MaxLength="200" Width="400" />
+
+                <TextBlock Text="Email" Style="{StaticResource lblTitle}" />
+                <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Email, Mode=TwoWay}" MaxLength="200" Width="400"  />
 
                 <TextBlock Text="Cep" Style="{StaticResource lblTitle}" />
                 <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Cep, Mode=TwoWay}" MaxLength="9" Width="130"  />
@@ -42,6 +45,7 @@
 
                 <TextBlock Text="UF" Style="{StaticResource lblTitle}" />
                 <TextBox Style="{StaticResource txtBoxForm}" Text="{Binding Uf, Mode=TwoWay}" MaxLength="2" Width="70"  />
+
 
                 <CalendarDatePicker Style="{StaticResource calendarForm}" 
                                 Date="{Binding DataDeNascimento, Mode=TwoWay, Converter={StaticResource TimeConverter}}" 

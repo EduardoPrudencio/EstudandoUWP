@@ -15,6 +15,7 @@
             SelectionChanged="nvTopLevelNav_SelectionChanged"
             ItemInvoked="nvTopLevelNav_ItemInvoked"
             IsTabStop="False"
+            IsBackButtonVisible="Collapsed"
             Header="Lista de Contatos" Foreground="Orange">
 
             <!--<NavigationView.AutoSuggestBox>
