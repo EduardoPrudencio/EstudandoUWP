@@ -51,15 +51,9 @@ namespace Remeberme
                 Icon = new SymbolIcon { Symbol = Symbol.AddFriend }
             };
 
-            NavigationViewItem naviViewItemImoveis = new NavigationViewItem
-            {
-                Content = "Imóveis",
-                Icon = new SymbolIcon { Symbol = Symbol.Home }
-            };
-
             listaTempDeItens = new List<NavigationViewItem>
             {
-                naviViewItemInicio, naviViewItemContatos, naviViewItemNovoContato,naviViewItemImoveis
+                naviViewItemInicio, naviViewItemContatos, naviViewItemNovoContato
             };
 
             return listaTempDeItens;

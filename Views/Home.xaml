@@ -9,6 +9,12 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock Text="This is a Home page"  FontSize="55"/>
+        <RelativePanel>
+            <Rectangle Fill="Red" MinHeight="250" MinWidth="100"  
+                       RelativePanel.AlignLeftWithPanel="True" 
+                       RelativePanel.AlignRightWithPanel="True"
+                       Margin="10,10,10,0"
+                       />
+        </RelativePanel>
     </Grid>
 </Page>

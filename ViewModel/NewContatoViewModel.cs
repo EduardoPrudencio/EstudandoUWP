@@ -1,28 +1,28 @@
 ﻿using Remeberme.Commands;
 using Remeberme.DataAccess;
+using Remeberme.Helpers.Servicos;
 using Remeberme.Model;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Windows.UI.Core;
 using Windows.UI.Popups;
-using Windows.UI.Xaml;
 
 namespace Remeberme.ViewModel
 {
     public class NewContatoViewModel : ViewModelBase
     {
-        private Contato contato     = null;
+        private Contato contato = null;
         private bool _salvandoDados = false;
-        private bool _emEdicao      = false;
+        private bool _emEdicao = false;
+        private bool _buscandoCep = false;
+        private ServicoHttp _servicoHttp;
 
         public NewContatoViewModel()
         {
             if (contato == null) contato = new Contato();
+
+            _servicoHttp = new ServicoHttp();
         }
 
         public bool IsActiveToSave
@@ -93,6 +93,9 @@ namespace Remeberme.ViewModel
 
         public bool Emedicao { get { return _emEdicao; } set { if (value != _emEdicao) _emEdicao = value; } }
 
+        public bool BuscandoCep { get { return _buscandoCep; } set { if (value != _buscandoCep) _buscandoCep = value; OnPropertyChanged("BuscandoCep"); } }
+
+
         public DateTime DataDeNascimento
         {
             get { return contato.DataDeNascimento; }
@@ -107,6 +110,45 @@ namespace Remeberme.ViewModel
         public ICommand CancelButtonClicked
         {
             get { return new DelegateNewContactCommand(ResetForm); }
+        }
+
+        public ICommand ObterEnderecoporCep
+        {
+            get { return new DelegateNewContactCommand(GetLocation); }
+        }
+
+        private async void GetLocation()
+        {
+            Localizacao localizacaoCompleta = new Localizacao();
+            MessageDialog dialog = null;
+            BuscandoCep = true;
+
+            string apiKey = "qqqqqqqqqqqqqqqqqqqqqqqqq";
+            string appSecret = "aaaaaaaaaaaaaaaaaaaaaa";
+
+            Task obterCepTask = Task.Run(() =>
+            {
+                string urlTest = $"https://webmaniabr.com/api/1/cep/{Cep}/?app_key={apiKey}&app_secret={appSecret}";
+                string location = _servicoHttp.Get(urlTest);
+                localizacaoCompleta = Newtonsoft.Json.JsonConvert.DeserializeObject<Localizacao>(location);
+
+            });
+
+            obterCepTask.Wait();
+            BuscandoCep = false;
+
+            if (string.IsNullOrWhiteSpace(localizacaoCompleta.Endereco) || string.IsNullOrWhiteSpace(localizacaoCompleta.Bairro) || string.IsNullOrWhiteSpace(localizacaoCompleta.Cidade) || string.IsNullOrWhiteSpace(localizacaoCompleta.Uf))
+            {
+                dialog = new MessageDialog($"Não foi possível obter o endereço com o cep {Cep}.");
+                await dialog.ShowAsync();
+            }
+            else
+            {
+                Endereco = localizacaoCompleta.Endereco;
+                Bairro = localizacaoCompleta.Bairro;
+                Cidade = localizacaoCompleta.Cidade;
+                Uf = localizacaoCompleta.Uf;
+            }
         }
 
         public async void FindResult()
@@ -130,7 +172,7 @@ namespace Remeberme.ViewModel
                    else
                        DataManager.Instance.AddContato(contato);
 
-                       listaSalvaComSucesso = DataManager.Instance.SaveList();
+                   listaSalvaComSucesso = DataManager.Instance.SaveList();
 
                    nameToShow = contato.Nome;
                });
@@ -148,7 +190,7 @@ namespace Remeberme.ViewModel
                 await dialog.ShowAsync();
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
@@ -163,17 +205,17 @@ namespace Remeberme.ViewModel
 
         private void ResetForm()
         {
-            this.Nome             = "";
-            this.Email            = "";
-            this.Cep              = "";
-            this.Numero           = 0;
-            this.Complemento      = "";
-            this.Endereco         = "";
-            this.Cidade           = "";
-            this.Bairro           = "";
-            this.Uf               = "";
+            this.Nome = "";
+            this.Email = "";
+            this.Cep = "";
+            this.Numero = 0;
+            this.Complemento = "";
+            this.Endereco = "";
+            this.Cidade = "";
+            this.Bairro = "";
+            this.Uf = "";
             this.DataDeNascimento = new DateTime(1950, 1, 1);
-            this.SalvandoDados    = false;
+            this.SalvandoDados = false;
 
         }
     }

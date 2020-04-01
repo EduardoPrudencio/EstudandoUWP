@@ -13,11 +13,9 @@ namespace Remeberme.ViewModel
     {
         public ObservableCollection<Contato> Contatos
         {
-            get {  return DataManager.Instance.Contatos; }
-            set {OnPropertyChanged("Contatos"); }
+            get { return DataManager.Instance.Contatos; }
+            set { OnPropertyChanged("Contatos"); }
         }
-
-        public event EventHandler NeedToChangePage;
 
         private Contato _itemListViewSelected;
 
@@ -31,7 +29,8 @@ namespace Remeberme.ViewModel
             }
         }
 
-        public ICommand EditSelectedContactClicked {
+        public ICommand EditSelectedContactClicked
+        {
             get { return new DelegateContactsCommand(EditContact); }
         }
 
@@ -40,7 +39,7 @@ namespace Remeberme.ViewModel
             get { return new DelegateContactsCommand(DeleteContact); }
         }
 
-        private  void EditContact()
+        private void EditContact()
         {
             Contato contatoEdit = DataManager.Instance.Contatos.FirstOrDefault(c => c.Id.ToString().Equals(this.ItemListViewSelected.Id.ToString()));
             Helpers.NavigationPage.Instance.GoToPage(new Helpers.NavigationEventArgs { PageToGo = "novo contato", ItemEdit = contatoEdit });
@@ -48,9 +47,9 @@ namespace Remeberme.ViewModel
 
         private async void DeleteContact()
         {
-            ContentDialog dialog = new ContentDialog 
-            { 
-                Title= "Atenção",
+            ContentDialog dialog = new ContentDialog
+            {
+                Title = "Atenção",
                 Content = $"Deseja mesmo excluir o contato {this.ItemListViewSelected.Nome}?",
                 PrimaryButtonText = "Sim",
                 SecondaryButtonText = "Não",
@@ -62,7 +61,7 @@ namespace Remeberme.ViewModel
             string idSelecionado = string.Empty;
 
             if (result == ContentDialogResult.Primary)
-            { 
+            {
                 idSelecionado = ItemListViewSelected.Id.ToString();
 
                 Contato contato = DataManager.Instance.Contatos.FirstOrDefault(x => x.Id.ToString().Equals(idSelecionado));
